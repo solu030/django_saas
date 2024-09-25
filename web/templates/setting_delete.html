@@ -1,0 +1,54 @@
+{% extends "layout/manage.html" %}
+{% load static %}
+{% block title %}项目设置{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <style>
+        .choose{
+            border-left: #ffd900 2px solid !important;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container clearfix" style="margin-top: 20px">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: transparent;font-weight: bold">
+                    个人中心
+                </div>
+                <div class="list-group" style="border-radius: 0">
+                    <div>
+                        <a href="#" class="list-group-item">我的资料</a>
+                        <a href="#" class="list-group-item">修改密码</a>
+                        <a href="{% url 'setting_delete' project_id=request.tracer.project.id %}" class="list-group-item choose">删除项目</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    删除项目
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">项目名</label>
+                            <div class="col-sm-5">
+                                <input type="text" placeholder="请输入项目名:" class="form-control" name="project_name" >
+                                <span class="error-msg">{{ error }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-5">
+                                <input type="submit" value="删 除" class="btn btn-danger">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}{% endblock %}
